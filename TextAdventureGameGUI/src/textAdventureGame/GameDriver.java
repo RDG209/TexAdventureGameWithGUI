@@ -21,8 +21,8 @@ public class GameDriver {
 	
 	JFrame window;
 	Container con;
-	JPanel titlePanel, startPanel, mainTextPanel, choicePanel;
-	JLabel titleLabel;
+	JPanel titlePanel, startPanel, mainTextPanel, choicePanel, playerPanel;
+	JLabel titleLabel, hpLabel, hpLabelNum, weaponLabel, weaponName;
 	
 	JButton startButton, choice1, choice2, choice3;
 	
@@ -95,7 +95,7 @@ public class GameDriver {
 		mainTextPanel.setBackground(Color.decode("#3F3F3F"));
 		con.add(mainTextPanel);
 		
-		mainTextArea = new JTextArea("Welcome brave and wise " + playerName + ". Are you ready to    set off on your adventure? Or perhaps you wish to go to the market? Or even recieve a blessing?");
+		mainTextArea = new JTextArea("Welcome brave and wise " + playerName + ". Are you ready to set off on  your adventure?  Or perhaps you wish to go to the market? Or even recieve a blessing?");
 		mainTextArea.setBounds(100, 100, 600, 250);
 		mainTextArea.setBackground(Color.decode("#3F3F3F"));
 		mainTextArea.setForeground(Color.white);
@@ -127,6 +127,34 @@ public class GameDriver {
 		choice3.setFont(normalFont);
 		choicePanel.add(choice3);
 		
+		playerPanel = new JPanel();
+		playerPanel.setBounds(100, 15, 600, 50);
+		playerPanel.setBackground(Color.decode("#2D0068"));
+		playerPanel.setLayout(new GridLayout(1,4)); // seperates things on status bar
+		con.add(playerPanel);
+		
+		hpLabel = new JLabel("HP:");
+		hpLabel.setFont(normalFont);
+		hpLabel.setForeground(Color.white);
+		playerPanel.add(hpLabel);
+		
+		hpLabelNum = new JLabel();
+		hpLabelNum.setFont(normalFont);
+		hpLabelNum.setForeground(Color.white);
+		playerPanel.add(hpLabelNum);
+		
+		weaponLabel = new JLabel("Weapon:");
+		weaponLabel.setFont(normalFont);
+		weaponLabel.setForeground(Color.white);
+		playerPanel.add(weaponLabel);
+		
+		weaponName = new JLabel();
+		weaponName.setFont(normalFont);
+		weaponName.setForeground(Color.white);
+		playerPanel.add(weaponName);
+		
+		playerSetUp();
+		
 	}
 	
 	// CONTROLLER FOR TITLE SCREEN
@@ -140,19 +168,10 @@ public class GameDriver {
 	public void playerSetUp() {
 		
 		  
-		System.out.print("Enter your name brave adventurer: ");
-		playerName = keyboard.nextLine();
-		
-		System.out.printf("\nAh what a name, %s. Welcome to the land of Faerun, a realm you must explore in order to achieve your goals.\n", playerName);
-		System.out.printf("\nNow it is time you decide your goals. For what do you search for? What tangible item have you been sent on a quest for?: ");
-		questItemName = keyboard.nextLine();
-		
-		System.out.printf("\nNow then brave adventurer %s, how hearty are you? \nIf you'd rather fate decide then simply enter 0, otherwise enter how much health you have (1-15): ");
-		playerHP = keyboard.nextInt();
-		if (playerHP == 0) {
-			playerHP = rand.nextInt(15) +1;
-		}
-		keyboard.nextLine();
+		playerHP = 15;
+		playerWeapon = ("Knife");
+		weaponName.setText(playerWeapon);
+		hpLabelNum.setText("" + playerHP);
 		
 		
 		
