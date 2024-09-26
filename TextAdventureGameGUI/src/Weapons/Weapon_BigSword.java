@@ -5,7 +5,7 @@ public class Weapon_BigSword extends SuperWeapon {
 	
 	public Weapon_BigSword() {
 		
-		name = "LongSword";
+		name = "BIG Sword";
 		damage = 21;
 	}
 }

@@ -16,6 +16,8 @@ public class Story {
 	SuperMonster monster;
 	SuperWeapon weapon;
 	
+	boolean map = false;
+	
 	public Story(GameDriver g, UI userInterface, VisibilityManager vManager) {
 		
 		game = g;
@@ -26,7 +28,7 @@ public class Story {
 	
 	public void defaultSetup() {
 		
-		player.playerHP = 10;
+		player.playerHP = 20;
 		ui.hpLabelNum.setText("" +player.playerHP);
 		
 		player.currentWeapon = new Weapon_Knife();
@@ -37,18 +39,30 @@ public class Story {
 	public void selectPosition(String nextPos) {
 		switch(nextPos) {
 		case "townGate": townGate(); break;
+		case "prayge": prayge(); break;
+		case "blessing": blessing(); break;
 		case "seeMarket": seeMarket(); break;
 		case "buyBook": buyBook(); break;
 		case "buySword": buySword(); break;
 		case "settingOff": settingOff(); break;
-		case "prayge": prayge(); break;
-		case "blessing": blessing(); break;
 		case "tallHill": tallHill(); break;
-		case "north": north(); break;
 		case "encounterForest": encounterForest(); break;
+		case "encounterBandit": encounterBandit(); break;
+		case "encounterSalamander": encounterSalamander(); break;
 		case "fight": fight(); break;
+		case "fightSalamander": fightSalamander(); break;
 		case "playerAttack": playerAttack(); break;
+		case "playerAttackDesert": playerAttackDesert(); break;
 		case "monsterAttack": monsterAttack(); break;
+		case "monsterAttackDesert": monsterAttackDesert(); break;
+		case "winForest": winForest(); break;
+		case "lose": lose(); break;
+		case "east": east(); break;
+		case "north": north(); break;
+		case "west": west(); break;
+		case "winDesert": winDesert(); break;
+		case "pickUpRunicSword": pickUpRunicSword(); break;
+		
 		}
 	}
 	public void townGate() {
@@ -64,7 +78,6 @@ public class Story {
 		game.nextPos3 = "prayge";
 		
 	}
-	
 	public void seeMarket() {
 
 		ui.mainTextArea.setText("You walk to the bustling market seeing stalls line the square.\nA stout man call out, \n'Hey there fella! You wanting this 30lb sword?'");
@@ -145,8 +158,6 @@ public class Story {
 		game.nextPos2 = "settingOff";
 		game.nextPos3 = "seeMarket";
 	}
-
-	
 	public void settingOff() { // converging branch for post start
 
 		
@@ -192,7 +203,7 @@ public class Story {
 	public void encounterForest () {
 		monster = new Monster_Goblin();
 		
-		ui.mainTextArea.setText("You stop suddenly as a rock flies past your head.\nDarting out of the bushes you see a goblin \nstanding ready wiht a crude shortsword!");
+		ui.mainTextArea.setText("You stop suddenly as a rock flies past your head.\nDarting out of the bushes you see a goblin \nstanding ready with a crude shortsword!");
 
 		ui.choice1.setText("Time to be a hero!");
 		ui.choice2.setText("Take it cautiously...");
@@ -231,35 +242,208 @@ public class Story {
 			game.nextPos2 = "monsterAttack";
 			game.nextPos3 = "monsterAttack";
 		} else {
-			game.nextPos1 = "winFight";
-			game.nextPos2 = "winFight";
-			game.nextPos3 = "winFight";
+			game.nextPos1 = "winForest";
+			game.nextPos2 = "winForest";
+			game.nextPos3 = "winForest";
 		}
 		
 	}
 	public void monsterAttack() {
 		
-		int monsterDamage = monster.attack;
+		int monsterDamage = rand.nextInt(monster.attack);
 		
 		player.playerHP -= monsterDamage;
 		ui.hpLabelNum.setText("" + player.playerHP);
 		
 		ui.mainTextArea.setText("The " + monster.name + " has hit you for " + monsterDamage + "HP!\n\n"  + monster.name + " HP: " + monster.hp);
-
-		ui.choice1.setText(">");
-		ui.choice2.setText(">");
-		ui.choice3.setText(">");
 		
 		if (player.playerHP > 0) {
+			ui.choice1.setText("Bonk");
+			ui.choice2.setText("Center Mass!");
+			ui.choice3.setText("Go Low!");
+			
 			game.nextPos1 = "playerAttack";
 			game.nextPos2 = "playerAttack";
 			game.nextPos3 = "playerAttack";
 		} else {
+			ui.choice1.setText("The light...");
+			ui.choice2.setText("The blood...");
+			ui.choice3.setText("But...");
+			
 			game.nextPos1 = "lose";
 			game.nextPos2 = "lose";
 			game.nextPos3 = "lose";
 		}
 		
+	}
+	public void winForest() {
+		int hpPotion = rand.nextInt(20)+1;
+		
+		player.playerHP += hpPotion;
+		
+		ui.mainTextArea.setText("You beat the " + monster.name + "!\nThe " + monster.name + " dropped a healing potion and map leading to the Jewel!\nYou heal +" + hpPotion + "HP!");
+
+		ui.choice1.setText("Now I'm ready to follow the map!");
+		ui.choice2.setText("It's time to find that jewel!");
+		ui.choice3.setText("Maybe I should explore just a bit more...");
+		
+		map = true;
+		
+		game.nextPos1 = "mapRoad";
+		game.nextPos2 = "mapRoad";
+		game.nextPos3 = "tallHill";
+	}
+	public void lose() {
+		ui.mainTextArea.setText("You have fallen...\nAnother adventurer lays defeated...");
+
+		ui.choice1.setText("DEAD");
+		ui.choice2.setText("DEAD");
+		ui.choice3.setText("DEAD");
+	}
+	public void east() {
+		
+		ui.mainTextArea.setText("You walk further East!\nThis path opens to some calm hills, but there seems to be a figure up ahead...");
+
+		ui.choice1.setText("I think they're friendly :)");
+		ui.choice2.setText("Ah well I must go that way");
+		ui.choice3.setText("I'll find another way...");
+		
+		game.nextPos1 = "encounterBandit";
+		game.nextPos2 = "encounterBandit";
+		game.nextPos3 = "tallHill";
+	}
+	public void encounterBandit() {
+		monster = new Monster_Bandit();
+		
+		ui.mainTextArea.setText("The peace is cut short when a bandit appears on the road!\nBandit, 'Hey buddy, you're gonna have to hand over that weapon of yours if you wanna live...'");
+
+		ui.choice1.setText("Hm, *runs away*");
+		ui.choice2.setText("But what if maybe, no?");
+		ui.choice3.setText("Have at thee brigand!");
+		
+		game.nextPos1 = "tallHill";
+		game.nextPos2 = "fight";
+		game.nextPos3 = "fight";
+	}
+	public void west() {
+		ui.mainTextArea.setText("You walk further West!\nThis path eventually leads to some rocky desert where the sun rages above.\n");
+
+		ui.choice1.setText("It's way too hot here...");
+		ui.choice2.setText("If I walk anymore I'll die...");
+		ui.choice3.setText("Just a bit more, this WILL pay off!");
+		
+		game.nextPos1 = "tallHill";
+		game.nextPos2 = "tallHill";
+		game.nextPos3 = "encounterSalamander";
+	}
+	public void encounterSalamander() {
+		monster = new Monster_Salamander();
+		
+		ui.mainTextArea.setText("Suddenly a giant man-eating salamander bursts out of the ground!\nBehind it you see a shiny object.");
+
+		ui.choice1.setText("Hm, *runs away*");
+		ui.choice2.setText("I will advance!");
+		ui.choice3.setText("It's over for you lizard!");
+		
+		game.nextPos1 = "tallHill";
+		game.nextPos2 = "fight";
+		game.nextPos3 = "fight";
+	}
+	public void fightSalamander() {
+		
+		ui.mainTextArea.setText(monster.name + " HP: " + monster.hp + "\n\nYou steel your nerves and prepare for battle!\nWhat's the move?");
+
+		ui.choice1.setText("Attack Head on!");
+		ui.choice2.setText("Lets riposte its next attack...");
+		ui.choice3.setText("Hm, *runs away*");
+		
+		game.nextPos1 = "playerAttack";
+		game.nextPos2 = "playerAttack";
+		game.nextPos3 = "tallHill";
+	}
+	public void playerAttackDesert() {
+		int playerDamage = rand.nextInt(player.currentWeapon.damage)+1;
+		
+		monster.hp -= playerDamage;
+		
+		ui.mainTextArea.setText("You have attacked the " + monster.name + " for " + playerDamage + "HP!\n\n" + monster.name + " HP: " + monster.hp);
+
+		ui.choice1.setText(">");
+		ui.choice2.setText(">");
+		ui.choice3.setText(">");
+		
+		if (monster.hp > 0) {
+			game.nextPos1 = "monsterAttack";
+			game.nextPos2 = "monsterAttack";
+			game.nextPos3 = "monsterAttack";
+		} else {
+			game.nextPos1 = "winDesert";
+			game.nextPos2 = "winDesert";
+			game.nextPos3 = "winDesert";
+		}
+		
+	}
+	public void monsterAttackDesert() {
+		
+		int monsterDamage = rand.nextInt(monster.attack);
+		
+		player.playerHP -= monsterDamage;
+		ui.hpLabelNum.setText("" + player.playerHP);
+		
+		ui.mainTextArea.setText("The " + monster.name + " has hit you for " + monsterDamage + "HP!\n\n"  + monster.name + " HP: " + monster.hp);
+		
+		if (player.playerHP > 0) {
+			ui.choice1.setText("Bonk");
+			ui.choice2.setText("Center Mass!");
+			ui.choice3.setText("Go Low!");
+			
+			game.nextPos1 = "playerAttackDesert";
+			game.nextPos2 = "playerAttackDesert";
+			game.nextPos3 = "playerAttackDesert";
+		} else {
+			ui.choice1.setText("The light...");
+			ui.choice2.setText("The blood...");
+			ui.choice3.setText("But...");
+			
+			game.nextPos1 = "lose";
+			game.nextPos2 = "lose";
+			game.nextPos3 = "lose";
+		}
+		
+	}
+	public void winDesert() {
+		int hpPotion = rand.nextInt(40)+1;
+		
+		player.playerHP += hpPotion;
+		
+		ui.mainTextArea.setText("You beat the " + monster.name + "!\nThe " + monster.name + " dropped a healing potion and map leading to the Jewel!\nYou heal +" + hpPotion + "HP!\n\nAdditionally you notice a runic blade on the ground...");
+
+		ui.choice1.setText("Now I'm ready to follow the map!");
+		ui.choice2.setText("I'll need that blade before we keep moving!");
+		ui.choice3.setText("Maybe I should explore just a bit more...");
+		
+		map = true;
+		
+		
+		game.nextPos1 = "mapRoad";
+		game.nextPos2 = "mapRoad";
+		game.nextPos3 = "tallHill";
+	}
+	public void pickUpRunicSword() {
+		ui.mainTextArea.setText("You pick up the runic sword,\nIt feels strong and now you feel ready to continue onwards.");
+
+		ui.choice1.setText("Huzzah");
+		ui.choice2.setText("Onwards to the Jewel!");
+		ui.choice3.setText("We will Win!");
+		
+		weapon = new Weapon_RunicSword();
+		
+		player.currentWeapon = weapon;
+		ui.weaponName.setText(player.currentWeapon.name);
+		
+		game.nextPos1 = "mapRoad";
+		game.nextPos2 = "mapRoad";
+		game.nextPos3 = "mapRoad";
 	}
 	
 	
