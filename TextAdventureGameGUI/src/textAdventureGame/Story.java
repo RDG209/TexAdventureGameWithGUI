@@ -62,6 +62,7 @@ public class Story {
 		case "west": west(); break;
 		case "winDesert": winDesert(); break;
 		case "pickUpRunicSword": pickUpRunicSword(); break;
+		case "mapRoad": mapRoad(); break;
 		
 		}
 	}
@@ -444,6 +445,17 @@ public class Story {
 		game.nextPos1 = "mapRoad";
 		game.nextPos2 = "mapRoad";
 		game.nextPos3 = "mapRoad";
+	}
+	public void mapRoad() {
+		ui.mainTextArea.setText("You set off on the road as detailed in the map,\nYou come upon a large ravine and look around for guidance...");
+
+		ui.choice1.setText("I think I can go around...");
+		ui.choice2.setText("Hm, those tree vines look pretty swingable");
+		ui.choice3.setText("Is that a rope bridge?");
+		
+		game.nextPos1 = "mountainPass"; // NOT MADE
+		game.nextPos2 = "dumbLose"; // NOT MADE
+		game.nextPos3 = "ropeBridge"; // NOT MADE
 	}
 	
 	
