@@ -63,6 +63,8 @@ public class Story {
 		case "winDesert": winDesert(); break;
 		case "pickUpRunicSword": pickUpRunicSword(); break;
 		case "mapRoad": mapRoad(); break;
+		case "mountainPass": mountainPass(); break;
+		case "dumbLose": dumbLose(); break;
 		
 		}
 	}
@@ -453,11 +455,32 @@ public class Story {
 		ui.choice2.setText("Hm, those tree vines look pretty swingable");
 		ui.choice3.setText("Is that a rope bridge?");
 		
-		game.nextPos1 = "mountainPass"; // NOT MADE
-		game.nextPos2 = "dumbLose"; // NOT MADE
+		game.nextPos1 = "mountainPass";
+		game.nextPos2 = "dumbLose";
 		game.nextPos3 = "ropeBridge"; // NOT MADE
 	}
-	
+	public void mountainPass() {
+		ui.mainTextArea.setText("You manage to find a narrow mountain pass,\nbut the narrow walk way on the side of the cliff looks scary...");
+
+		ui.choice1.setText("I'll just run fast enough to not be scared!");
+		ui.choice2.setText("Nice and easy...");
+		ui.choice3.setText("There should be another way right?");
+		
+		game.nextPos1 = "dumbLose"; 
+		game.nextPos2 = "otherSideRavine"; // NOT MADE
+		game.nextPos3 = "mapRoad"; 
+	}
+	public void dumbLose() {
+		ui.mainTextArea.setText("While brave to some, your actions were simply dumb...\nYou plummet to your death...");
+
+		ui.choice1.setText("NOOOOOO");
+		ui.choice2.setText("AHHHHHHHHH");
+		ui.choice3.setText("Darn");
+		
+		game.nextPos1 = "lose"; 
+		game.nextPos2 = "lose"; 
+		game.nextPos3 = "lose"; 
+	}
 	
 	
 }
