@@ -65,6 +65,8 @@ public class Story {
 		case "mapRoad": mapRoad(); break;
 		case "mountainPass": mountainPass(); break;
 		case "dumbLose": dumbLose(); break;
+		case "ropeBridge": ropeBridge(); break;
+		case "otherSideRavine": otherSideRavine(); break;
 		
 		}
 	}
@@ -457,7 +459,7 @@ public class Story {
 		
 		game.nextPos1 = "mountainPass";
 		game.nextPos2 = "dumbLose";
-		game.nextPos3 = "ropeBridge"; // NOT MADE
+		game.nextPos3 = "ropeBridge";
 	}
 	public void mountainPass() {
 		ui.mainTextArea.setText("You manage to find a narrow mountain pass,\nbut the narrow walk way on the side of the cliff looks scary...");
@@ -467,7 +469,7 @@ public class Story {
 		ui.choice3.setText("There should be another way right?");
 		
 		game.nextPos1 = "dumbLose"; 
-		game.nextPos2 = "otherSideRavine"; // NOT MADE
+		game.nextPos2 = "otherSideRavine";
 		game.nextPos3 = "mapRoad"; 
 	}
 	public void dumbLose() {
@@ -480,6 +482,28 @@ public class Story {
 		game.nextPos1 = "lose"; 
 		game.nextPos2 = "lose"; 
 		game.nextPos3 = "lose"; 
+	}
+	public void ropeBridge() {
+		ui.mainTextArea.setText("Carefully you walk across the bridge...\nWhen suddenly the rope begins to tear!");
+
+		ui.choice1.setText("Quick! Run Across!");
+		ui.choice2.setText("Hold on tight!");
+		ui.choice3.setText("Darn, oh well");
+		
+		game.nextPos1 = "otherSideRavine"; 
+		game.nextPos2 = "dumbLose"; 
+		game.nextPos3 = "lose"; 
+	}
+	public void otherSideRavine() {
+		ui.mainTextArea.setText("Finally having made it across you look around,\nYou notice a few ways you could move in,\nAll should lead you to the treasure.");
+
+		ui.choice1.setText("That jungle looks good");
+		ui.choice2.setText("Ah, direct up the rocky mountains I say");
+		ui.choice3.setText("It's noticable, but the road is always smart");
+		
+		game.nextPos1 = "jungleApeEncounter"; // NOT MADE
+		game.nextPos2 = "mountainGoatEncounter"; // NOT MADE
+		game.nextPos3 = "roadHobGoblinEncounter"; // NOT MADE
 	}
 	
 	
