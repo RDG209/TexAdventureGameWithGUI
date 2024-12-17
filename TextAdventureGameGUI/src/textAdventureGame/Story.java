@@ -67,6 +67,11 @@ public class Story {
 		case "dumbLose": dumbLose(); break;
 		case "ropeBridge": ropeBridge(); break;
 		case "otherSideRavine": otherSideRavine(); break;
+		case "jungleApeEncounter": jungleApeEncounter(); break;
+		case "fightStage2": fightStage2(); break;
+		case "playerAttackS2": playerAttackS2(); break;
+		case "winJungle": winJungle(); break;
+		
 		
 		}
 	}
@@ -501,11 +506,75 @@ public class Story {
 		ui.choice2.setText("Ah, direct up the rocky mountains I say");
 		ui.choice3.setText("It's noticable, but the road is always smart");
 		
-		game.nextPos1 = "jungleApeEncounter"; // NOT MADE
+		game.nextPos1 = "jungleApeEncounter";
 		game.nextPos2 = "mountainGoatEncounter"; // NOT MADE
 		game.nextPos3 = "roadHobGoblinEncounter"; // NOT MADE
 	}
-	
+	public void jungleApeEncounter() {
+		monster = new Monster_Ape();
+		
+		ui.mainTextArea.setText("You are cautiously walking through the dense jungle,\nSuddenly, you hear the angry call of some massive ape...");
+
+		ui.choice1.setText("Hm, *runs away*");
+		ui.choice2.setText("Well... This is the route...");
+		ui.choice3.setText("Have at thee beast!");
+		
+		game.nextPos1 = "otherSideRavine";
+		game.nextPos2 = "fightStage2";
+		game.nextPos3 = "fightStage2";
+	}
+	public void fightStage2() {
+		
+		ui.mainTextArea.setText(monster.name + " HP: " + monster.hp + "\n\nYou steel your nerves and prepare for battle!\nWhat's the move?");
+
+		ui.choice1.setText("Attack Head on!");
+		ui.choice2.setText("Bait and Strike!");
+		ui.choice3.setText("Hm, *runs away*");
+		
+		game.nextPos1 = "playerAttackS2";
+		game.nextPos2 = "playerAttackS2";
+		game.nextPos3 = "otherSideRavine";
+	}
+	public void playerAttackS2() {
+		int playerDamage = rand.nextInt(player.currentWeapon.damage)+1;
+		
+		monster.hp -= playerDamage;
+		
+		ui.mainTextArea.setText("You have attacked the " + monster.name + " for " + playerDamage + "HP!\n\n" + monster.name + " HP: " + monster.hp);
+
+		ui.choice1.setText(">");
+		ui.choice2.setText(">");
+		ui.choice3.setText(">");
+		
+		if (monster.hp > 0) {
+			game.nextPos1 = "monsterAttack";
+			game.nextPos2 = "monsterAttack";
+			game.nextPos3 = "monsterAttack";
+		} else {
+			game.nextPos1 = "winS2";
+			game.nextPos2 = "winS2";
+			game.nextPos3 = "winS2";
+		}
+		
+	}
+	public void winJungle() {
+		int hpPotion = rand.nextInt(40)+1;
+		
+		player.playerHP += hpPotion;
+		
+		ui.mainTextArea.setText("You beat the " + monster.name + "!\nThe " + monster.name + " dropped a healing potion and second map leading to the Jewel!\nYou heal +" + hpPotion + "HP!");
+
+		ui.choice1.setText("Finally! We're almost there!");
+		ui.choice2.setText("Let's just keep going");
+		ui.choice3.setText("Maybe I should explore just a bit more...");
+		
+		map = true;
+		
+		
+		game.nextPos1 = "mapRoadS2"; // NOT MADE
+		game.nextPos2 = "mapRoadS2"; // NOT MADE
+		game.nextPos3 = "otherSideRavine";
+	}
 	
 }
 
