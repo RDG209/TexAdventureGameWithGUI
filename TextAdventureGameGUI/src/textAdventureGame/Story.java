@@ -71,6 +71,8 @@ public class Story {
 		case "fightStage2": fightStage2(); break;
 		case "playerAttackS2": playerAttackS2(); break;
 		case "winJungle": winJungle(); break;
+		case "mountainGoatEncounter": jungleApeEncounter(); break;
+		case "roadHobGoblinEncounter": jungleApeEncounter(); break;
 		
 		
 		}
@@ -507,8 +509,34 @@ public class Story {
 		ui.choice3.setText("It's noticable, but the road is always smart");
 		
 		game.nextPos1 = "jungleApeEncounter";
-		game.nextPos2 = "mountainGoatEncounter"; // NOT MADE
-		game.nextPos3 = "roadHobGoblinEncounter"; // NOT MADE
+		game.nextPos2 = "mountainGoatEncounter";
+		game.nextPos3 = "roadHobGoblinEncounter";
+	}
+	public void mountainGoatEncounter() {
+		monster = new Monster_GiantGoat();
+		
+		ui.mainTextArea.setText("You are cautiously walking through the cold mountains,\nSuddenly, you hear the angry bahh of a massive goat...");
+
+		ui.choice1.setText("Hm, *runs away*");
+		ui.choice2.setText("Well... This is the route...");
+		ui.choice3.setText("Have at thee beast!");
+		
+		game.nextPos1 = "otherSideRavine";
+		game.nextPos2 = "fightStage2";
+		game.nextPos3 = "fightStage2";
+	}
+	public void roadHobGoblinEncounter() {
+		monster = new Monster_HobGoblin();
+		
+		ui.mainTextArea.setText("You are cautiously walking through the long dirt road,\nSuddenly, you see a HobGoblin step out from the shadows...");
+
+		ui.choice1.setText("Hm, *runs away*");
+		ui.choice2.setText("Well... This is the route...");
+		ui.choice3.setText("Have at thee... creature!");
+		
+		game.nextPos1 = "otherSideRavine";
+		game.nextPos2 = "fightStage2";
+		game.nextPos3 = "fightStage2";
 	}
 	public void jungleApeEncounter() {
 		monster = new Monster_Ape();
@@ -551,9 +579,9 @@ public class Story {
 			game.nextPos2 = "monsterAttack";
 			game.nextPos3 = "monsterAttack";
 		} else {
-			game.nextPos1 = "winS2";
-			game.nextPos2 = "winS2";
-			game.nextPos3 = "winS2";
+			game.nextPos1 = "winJungle";
+			game.nextPos2 = "winJungle";
+			game.nextPos3 = "winJungle";
 		}
 		
 	}
