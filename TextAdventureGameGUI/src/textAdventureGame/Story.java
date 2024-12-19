@@ -73,6 +73,7 @@ public class Story {
 		case "winJungle": winJungle(); break;
 		case "mountainGoatEncounter": jungleApeEncounter(); break;
 		case "roadHobGoblinEncounter": jungleApeEncounter(); break;
+		case "mapRoadS2": mapRoadS2(); break;
 		
 		
 		}
@@ -599,9 +600,20 @@ public class Story {
 		map = true;
 		
 		
-		game.nextPos1 = "mapRoadS2"; // NOT MADE
-		game.nextPos2 = "mapRoadS2"; // NOT MADE
+		game.nextPos1 = "mapRoadS2";
+		game.nextPos2 = "mapRoadS2";
 		game.nextPos3 = "otherSideRavine";
+	}
+	public void mapRoadS2() {
+		ui.mainTextArea.setText("With this next leg mapped out, you set off!\nEventually you come across a mysterious forest on your path...");
+
+		ui.choice1.setText("Time to bushwack! No time to lose!");
+		ui.choice2.setText("Nice and careful now...");
+		ui.choice3.setText("I think... its calling...");
+		
+		game.nextPos1 = "magForestAnger"; // NOT MADE
+		game.nextPos2 = "magForestDryads"; // NOT MADE
+		game.nextPos3 = "magForestTrance"; // NOT MADE
 	}
 	
 }
