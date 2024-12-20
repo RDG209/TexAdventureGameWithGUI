@@ -73,7 +73,7 @@ public class Story {
 		case "winJungle": winJungle(); break;
 		case "mountainGoatEncounter": jungleApeEncounter(); break;
 		case "roadHobGoblinEncounter": jungleApeEncounter(); break;
-		case "mapRoadS2": mapRoadS2(); break;
+		case "mapRoadS2": mapRoadS2(); break; 
 		
 		
 		}
