@@ -615,6 +615,17 @@ public class Story {
 		game.nextPos2 = "magForestDryads"; // NOT MADE
 		game.nextPos3 = "magForestTrance"; // NOT MADE
 	}
+	public void magForestAnger() {
+		ui.mainTextArea.setText("As you begin whacking the bush, you hear the rumble of heavy footfalls\nSuddenly, you see a massive Magical Tree coming out, and he's angry!");
+
+		ui.choice1.setText("Just another bush to whack!");
+		ui.choice2.setText("Imma just... go now...");
+		ui.choice3.setText("Welp... I guess this is life now");
+		
+		game.nextPos1 = "treeEncounter"; // NOT MADE
+		game.nextPos2 = "otherSideRavine";
+		game.nextPos3 = "treeEncounter"; // NOT MADE
+	}
 	
 }
 
