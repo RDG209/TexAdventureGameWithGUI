@@ -74,6 +74,8 @@ public class Story {
 		case "mountainGoatEncounter": jungleApeEncounter(); break;
 		case "roadHobGoblinEncounter": jungleApeEncounter(); break;
 		case "mapRoadS2": mapRoadS2(); break; 
+		case "magForestAnger": magForestAnger(); break;
+		case "treeEncounter": treeEncounter(); break;
 		
 		
 		}
@@ -622,9 +624,22 @@ public class Story {
 		ui.choice2.setText("Imma just... go now...");
 		ui.choice3.setText("Welp... I guess this is life now");
 		
-		game.nextPos1 = "treeEncounter"; // NOT MADE
+		game.nextPos1 = "treeEncounter";
 		game.nextPos2 = "otherSideRavine";
-		game.nextPos3 = "treeEncounter"; // NOT MADE
+		game.nextPos3 = "treeEncounter";
+	}
+	public void treeEncounter() {
+		monster = new Monster_Tree();
+		
+		ui.mainTextArea.setText("You are cautiously walking through the wicked forest,\nSuddenly, you see a troo become uprooted as it sprouts arms and legs\nIts Mad!");
+
+		ui.choice1.setText("Hm, *runs away*");
+		ui.choice2.setText("Well... This is the route...");
+		ui.choice3.setText("Have at thee... Plant!");
+		
+		game.nextPos1 = "otherSideRavine";
+		game.nextPos2 = "fightStage2";
+		game.nextPos3 = "fightStage2";
 	}
 	
 }
