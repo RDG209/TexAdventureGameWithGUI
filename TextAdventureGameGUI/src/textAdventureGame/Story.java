@@ -613,7 +613,7 @@ public class Story {
 		ui.choice2.setText("Nice and careful now...");
 		ui.choice3.setText("I think... its calling...");
 		
-		game.nextPos1 = "magForestAnger"; // NOT MADE
+		game.nextPos1 = "magForestAnger";
 		game.nextPos2 = "magForestDryads"; // NOT MADE
 		game.nextPos3 = "magForestTrance"; // NOT MADE
 	}
@@ -632,6 +632,30 @@ public class Story {
 		monster = new Monster_Tree();
 		
 		ui.mainTextArea.setText("You are cautiously walking through the wicked forest,\nSuddenly, you see a troo become uprooted as it sprouts arms and legs\nIts Mad!");
+
+		ui.choice1.setText("Hm, *runs away*");
+		ui.choice2.setText("Well... This is the route...");
+		ui.choice3.setText("Have at thee... Plant!");
+		
+		game.nextPos1 = "otherSideRavine";
+		game.nextPos2 = "fightStage2";
+		game.nextPos3 = "fightStage2";
+	}
+	public void magForestDryads() {
+		ui.mainTextArea.setText("As you begin whacking the bush, you hear some soft foot pads on the leaves,\nSuddenly, you see a woman made of vines and plants coming out, and she's angry!");
+
+		ui.choice1.setText("Just another bush to whack!");
+		ui.choice2.setText("Imma just... go now...");
+		ui.choice3.setText("Welp... I guess this is life now");
+		
+		game.nextPos1 = "dryadEncounter";
+		game.nextPos2 = "otherSideRavine";
+		game.nextPos3 = "dryadEncounter";
+	}
+	public void dryadEncounter() {
+		monster = new Monster_Dryad();
+		
+		ui.mainTextArea.setText("You are cautiously walking through the wicked forest,\nSuddenly, you see this drayd appear out of a tree!\nIts Mad!");
 
 		ui.choice1.setText("Hm, *runs away*");
 		ui.choice2.setText("Well... This is the route...");
