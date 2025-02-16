@@ -76,6 +76,8 @@ public class Story {
 		case "mapRoadS2": mapRoadS2(); break; 
 		case "magForestAnger": magForestAnger(); break;
 		case "treeEncounter": treeEncounter(); break;
+		case "magForestTrance": magForestTrance(); break;
+		case "witchEncounter": witchEncounter(); break;
 		
 		
 		}
@@ -614,8 +616,8 @@ public class Story {
 		ui.choice3.setText("I think... its calling...");
 		
 		game.nextPos1 = "magForestAnger";
-		game.nextPos2 = "magForestDryads"; // NOT MADE
-		game.nextPos3 = "magForestTrance"; // NOT MADE
+		game.nextPos2 = "magForestDryads";
+		game.nextPos3 = "magForestTrance";
 	}
 	public void magForestAnger() {
 		ui.mainTextArea.setText("As you begin whacking the bush, you hear the rumble of heavy footfalls\nSuddenly, you see a massive Magical Tree coming out, and he's angry!");
@@ -660,6 +662,31 @@ public class Story {
 		ui.choice1.setText("Hm, *runs away*");
 		ui.choice2.setText("Well... This is the route...");
 		ui.choice3.setText("Have at thee... Plant!");
+		
+		game.nextPos1 = "otherSideRavine";
+		game.nextPos2 = "fightStage2";
+		game.nextPos3 = "fightStage2";
+	}
+	public void magForestTrance() {
+		
+		ui.mainTextArea.setText("You are cautiously walking through the wicked forest,\nSuddenly, you see feel yourself being draw\ndeep into the woods...");
+
+		ui.choice1.setText("Hm, *runs away*");
+		ui.choice2.setText("Well... This is the route...");
+		ui.choice3.setText("Wha... what's going on?");
+		
+		game.nextPos1 = "otherSideRavine";
+		game.nextPos2 = "witchEncounter";
+		game.nextPos3 = "witchEncounter";
+	}
+	public void witchEncounter() {
+		monster = new Monster_Witch();
+		
+		ui.mainTextArea.setText("You then find yourself face to face with a wicked Witch!");
+
+		ui.choice1.setText("Hm, *runs away*");
+		ui.choice2.setText("Huzzah!");
+		ui.choice3.setText("Have at thee... Lady!");
 		
 		game.nextPos1 = "otherSideRavine";
 		game.nextPos2 = "fightStage2";
